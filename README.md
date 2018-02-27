@@ -217,9 +217,9 @@ To do so, implement the `UITableViewDelegate` `didSelectRowAt indexPath` functio
 
 1. Adopt the `UITableViewDelegate` on the Search Results scene and add the `didSelectRowAt indexPath` delegate function. Implement the function by capturing the sending cell and telling the Search Result scene's `presentingViewController` to `performSegue(withIdentifier: String...)` and send the selected cell so that the Search scene can get the selected `Post`.
     * note: Every view controller class has an optional `presentingViewController` reference to the view controller that presented it. In this case, the presenting view controller of the Search Results scene is the Timeline scene. So this step will manually call the `performSegueWithIdentifier` on the Search scene.
-2. Update the `performSegue(withIdentifier: String...)` function on the Search Scene to capture and segue to the Post Detail scene with the correct post. Try to do so without looking at the solution code.
-    * note: You must check if the `tableView` can get an `indexPath` for the sender. If it can, that means that the cell was from the Search scene's `tableView`. If it can't, that means the cell is from the Search Result scene's `tableView` and that the user tapped a search result. If that is the case, capture the `Post` from the `resultsArray` on the `searchResultscontroller`.
-    * note: You can access the `searchResultsController` by calling `(searchController.searchResultsController as? SearchResultsTableViewController)`
+2. Update the `prepareForSegue(for segue: UIStoryboardSegue...)` function on the PostListTableViewController. Upon checking the identifier of the segue, you should capture the correct post and send it to the PostDetailViewController. Try to do so without looking at the solution code.
+    * hint: You must check if the `tableView` can get an `indexPath` for the sender. If it can, that means that the cell was from the Search scene's `tableView`. If it can't, that means the cell is from the Search Result scene's `tableView` and that the user tapped a search result. If that is the case, capture the `Post` from the `resultsArray` on the `searchResultscontroller`.
+    * hint: You can access the `searchResultsController` by calling `(searchController.searchResultsController as? SearchResultsTableViewController)`
 
 Try to work through the Search segue without looking at the solution code. Understanding this pattern will solidify your understanding of many object-oriented programming patterns.
 
